@@ -1,0 +1,66 @@
+ii  blackfire-php                      1.17.3                                                   amd64        Blackfire PHP Probe
+ii  dh-php                             0.27+deb.sury.org~xenial+1                               all          debhelper add-on to handle PHP PECL extensions
+ii  php-common                         1:53~ubuntu16.04.1+deb.sury.org+1                        all          Common files for PHP packages
+ii  php-igbinary                       2.0.1-1+deb.sury.org~xenial+1                            amd64        igbinary PHP serializer
+ii  php-memcached                      3.0.3+2.2.0-1+deb.sury.org~xenial+1                      amd64        memcached extension module for PHP, uses libmemcached
+ii  php-msgpack                        2.0.2+0.5.7-1+deb.sury.org~xenial+2                      amd64        PHP extension for interfacing with MessagePack
+ii  php-pear                           1:1.10.4+submodules+notgz-1~ubuntu16.04.1+deb.sury.org+1 all          PEAR Base System
+ii  php-xdebug                         2.5.5-3+ubuntu16.04.1+deb.sury.org+1                     amd64        Xdebug Module for PHP
+ii  php5.6-bcmath                      5.6.31-1~ubuntu16.04.1+deb.sury.org+1                    amd64        Bcmath module for PHP
+ii  php5.6-cli                         5.6.31-1~ubuntu16.04.1+deb.sury.org+1                    amd64        command-line interpreter for the PHP scripting language
+ii  php5.6-common                      5.6.31-1~ubuntu16.04.1+deb.sury.org+1                    amd64        documentation, examples and common module for PHP
+ii  php5.6-curl                        5.6.31-1~ubuntu16.04.1+deb.sury.org+1                    amd64        CURL module for PHP
+ii  php5.6-dev                         5.6.31-1~ubuntu16.04.1+deb.sury.org+1                    amd64        Files for PHP5.6 module development
+ii  php5.6-fpm                         5.6.31-1~ubuntu16.04.1+deb.sury.org+1                    amd64        server-side, HTML-embedded scripting language (FPM-CGI binary)
+ii  php5.6-gd                          5.6.31-1~ubuntu16.04.1+deb.sury.org+1                    amd64        GD module for PHP
+ii  php5.6-imap                        5.6.31-1~ubuntu16.04.1+deb.sury.org+1                    amd64        IMAP module for PHP
+ii  php5.6-intl                        5.6.31-1~ubuntu16.04.1+deb.sury.org+1                    amd64        Internationalisation module for PHP
+ii  php5.6-json                        5.6.31-1~ubuntu16.04.1+deb.sury.org+1                    amd64        JSON module for PHP
+ii  php5.6-mbstring                    5.6.31-1~ubuntu16.04.1+deb.sury.org+1                    amd64        MBSTRING module for PHP
+ii  php5.6-mysql                       5.6.31-1~ubuntu16.04.1+deb.sury.org+1                    amd64        MySQL module for PHP
+ii  php5.6-opcache                     5.6.31-1~ubuntu16.04.1+deb.sury.org+1                    amd64        Zend OpCache module for PHP
+ii  php5.6-pgsql                       5.6.31-1~ubuntu16.04.1+deb.sury.org+1                    amd64        PostgreSQL module for PHP
+ii  php5.6-readline                    5.6.31-1~ubuntu16.04.1+deb.sury.org+1                    amd64        readline module for PHP
+ii  php5.6-soap                        5.6.31-1~ubuntu16.04.1+deb.sury.org+1                    amd64        SOAP module for PHP
+ii  php5.6-sqlite3                     5.6.31-1~ubuntu16.04.1+deb.sury.org+1                    amd64        SQLite3 module for PHP
+ii  php5.6-xml                         5.6.31-1~ubuntu16.04.1+deb.sury.org+1                    amd64        DOM, SimpleXML, WDDX, XML, and XSL module for PHP
+ii  php5.6-zip                         5.6.31-1~ubuntu16.04.1+deb.sury.org+1                    amd64        Zip module for PHP
+ii  php7.0-bcmath                      7.0.21-1~ubuntu16.04.1+deb.sury.org+1                    amd64        Bcmath module for PHP
+ii  php7.0-cli                         7.0.21-1~ubuntu16.04.1+deb.sury.org+1                    amd64        command-line interpreter for the PHP scripting language
+ii  php7.0-common                      7.0.21-1~ubuntu16.04.1+deb.sury.org+1                    amd64        documentation, examples and common module for PHP
+ii  php7.0-curl                        7.0.21-1~ubuntu16.04.1+deb.sury.org+1                    amd64        CURL module for PHP
+ii  php7.0-dev                         7.0.21-1~ubuntu16.04.1+deb.sury.org+1                    amd64        Files for PHP7.0 module development
+ii  php7.0-fpm                         7.0.21-1~ubuntu16.04.1+deb.sury.org+1                    amd64        server-side, HTML-embedded scripting language (FPM-CGI binary)
+ii  php7.0-gd                          7.0.21-1~ubuntu16.04.1+deb.sury.org+1                    amd64        GD module for PHP
+ii  php7.0-imap                        7.0.21-1~ubuntu16.04.1+deb.sury.org+1                    amd64        IMAP module for PHP
+ii  php7.0-intl                        7.0.21-1~ubuntu16.04.1+deb.sury.org+1                    amd64        Internationalisation module for PHP
+ii  php7.0-json                        7.0.21-1~ubuntu16.04.1+deb.sury.org+1                    amd64        JSON module for PHP
+ii  php7.0-mbstring                    7.0.21-1~ubuntu16.04.1+deb.sury.org+1                    amd64        MBSTRING module for PHP
+ii  php7.0-mysql                       7.0.21-1~ubuntu16.04.1+deb.sury.org+1                    amd64        MySQL module for PHP
+ii  php7.0-opcache                     7.0.21-1~ubuntu16.04.1+deb.sury.org+1                    amd64        Zend OpCache module for PHP
+ii  php7.0-pgsql                       7.0.21-1~ubuntu16.04.1+deb.sury.org+1                    amd64        PostgreSQL module for PHP
+ii  php7.0-readline                    7.0.21-1~ubuntu16.04.1+deb.sury.org+1                    amd64        readline module for PHP
+ii  php7.0-soap                        7.0.21-1~ubuntu16.04.1+deb.sury.org+1                    amd64        SOAP module for PHP
+ii  php7.0-sqlite3                     7.0.21-1~ubuntu16.04.1+deb.sury.org+1                    amd64        SQLite3 module for PHP
+ii  php7.0-xml                         7.0.21-1~ubuntu16.04.1+deb.sury.org+1                    amd64        DOM, SimpleXML, WDDX, XML, and XSL module for PHP
+ii  php7.0-zip                         7.0.21-1~ubuntu16.04.1+deb.sury.org+1                    amd64        Zip module for PHP
+ii  php7.1-bcmath                      7.1.7.retag-1+ubuntu16.04.1+deb.sury.org+1               amd64        Bcmath module for PHP
+ii  php7.1-cli                         7.1.7.retag-1+ubuntu16.04.1+deb.sury.org+1               amd64        command-line interpreter for the PHP scripting language
+ii  php7.1-common                      7.1.7.retag-1+ubuntu16.04.1+deb.sury.org+1               amd64        documentation, examples and common module for PHP
+ii  php7.1-curl                        7.1.7.retag-1+ubuntu16.04.1+deb.sury.org+1               amd64        CURL module for PHP
+ii  php7.1-dev                         7.1.7.retag-1+ubuntu16.04.1+deb.sury.org+1               amd64        Files for PHP7.1 module development
+ii  php7.1-fpm                         7.1.7.retag-1+ubuntu16.04.1+deb.sury.org+1               amd64        server-side, HTML-embedded scripting language (FPM-CGI binary)
+ii  php7.1-gd                          7.1.7.retag-1+ubuntu16.04.1+deb.sury.org+1               amd64        GD module for PHP
+ii  php7.1-imap                        7.1.7.retag-1+ubuntu16.04.1+deb.sury.org+1               amd64        IMAP module for PHP
+ii  php7.1-intl                        7.1.7.retag-1+ubuntu16.04.1+deb.sury.org+1               amd64        Internationalisation module for PHP
+ii  php7.1-json                        7.1.7.retag-1+ubuntu16.04.1+deb.sury.org+1               amd64        JSON module for PHP
+ii  php7.1-mbstring                    7.1.7.retag-1+ubuntu16.04.1+deb.sury.org+1               amd64        MBSTRING module for PHP
+ii  php7.1-mysql                       7.1.7.retag-1+ubuntu16.04.1+deb.sury.org+1               amd64        MySQL module for PHP
+ii  php7.1-opcache                     7.1.7.retag-1+ubuntu16.04.1+deb.sury.org+1               amd64        Zend OpCache module for PHP
+ii  php7.1-pgsql                       7.1.7.retag-1+ubuntu16.04.1+deb.sury.org+1               amd64        PostgreSQL module for PHP
+ii  php7.1-readline                    7.1.7.retag-1+ubuntu16.04.1+deb.sury.org+1               amd64        readline module for PHP
+ii  php7.1-soap                        7.1.7.retag-1+ubuntu16.04.1+deb.sury.org+1               amd64        SOAP module for PHP
+ii  php7.1-sqlite3                     7.1.7.retag-1+ubuntu16.04.1+deb.sury.org+1               amd64        SQLite3 module for PHP
+ii  php7.1-xml                         7.1.7.retag-1+ubuntu16.04.1+deb.sury.org+1               amd64        DOM, SimpleXML, WDDX, XML, and XSL module for PHP
+ii  php7.1-zip                         7.1.7.retag-1+ubuntu16.04.1+deb.sury.org+1               amd64        Zip module for PHP
+ii  pkg-php-tools                      1.33+deb.sury.org~xenial+1                               all          various packaging tools and scripts for PHP packages
