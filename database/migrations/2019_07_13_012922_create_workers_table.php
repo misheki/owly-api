@@ -22,12 +22,13 @@ class CreateWorkersTable extends Migration
             $table->string('code'); //short or nick name
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
-            $table->string('');
             $table->date('started_at')->nullable();
+            $table->date('ended_at')->nullable();
             $table->string('staff_id')->nullable();
             $table->string('qr'); // OWLY#<ORG CODE>#<WORKER CODE>
             $table->string('status'); // A for ACTIVE, I for INACTIVE
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

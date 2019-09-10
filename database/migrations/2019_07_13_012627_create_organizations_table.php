@@ -24,6 +24,7 @@ class CreateOrganizationsTable extends Migration
             $table->string('address');
             $table->string('website'); 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

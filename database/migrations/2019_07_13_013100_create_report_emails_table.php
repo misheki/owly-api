@@ -15,6 +15,10 @@ class CreateReportEmailsTable extends Migration
     {
         Schema::create('report_emails', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('organization_id');
+            $table->foreign('organization_id')->references('id')->on('organizations');
+            $table->string('email_address');
+            $table->string('name');
             $table->timestamps();
         });
     }

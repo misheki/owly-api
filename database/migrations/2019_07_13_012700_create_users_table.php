@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('status'); //A for ACTIVE, I for INACTIVE
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

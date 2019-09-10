@@ -15,6 +15,13 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('organization_id');
+            $table->foreign('organization_id')->references('id')->on('organizations');
+            $table->string('title'); // From report_periods.title table
+            $table->string('report_period'); // Get from and to based on report_periods table
+            $table->string('type'); //MANUAL, DAILY, PERIODIC, MONTHLY
+            $table->string('filename');
+            $table->string('file_path');
             $table->timestamps();
         });
     }

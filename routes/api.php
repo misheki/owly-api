@@ -16,3 +16,13 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['middleware' => ['auth:api']], function () {
+
+    Route::get('daily/{date}', 'RecordController@daily');
+    Route::post('record/edit', 'RecordController@edit'); //Retrieve
+
+    Route::post('scan', 'ScanController@add');
+    Route::post('worker/add', 'WorkerController@add');
+
+});
