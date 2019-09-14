@@ -18,7 +18,7 @@ class CreateOrganizationsTable extends Migration
             $table->unsignedBigInteger('org_category_id');
             $table->foreign('org_category_id')->references('id')->on('org_categories');
             $table->string('name');
-            $table->string('code');
+            $table->string('code'); // final - will affect QR code
             $table->string('contact_person');
             $table->string('email');
             $table->string('address');

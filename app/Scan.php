@@ -15,6 +15,8 @@ class Scan extends Model
         'user_id', 'worker_code', 'scandt', 'edited_by', 'edit_remarks', 'edited_at'
     ];
 
+    protected $dates = ['scandt', 'edited_at'];
+
     public function user()
     {
         return $this->belongsTo('App\User');

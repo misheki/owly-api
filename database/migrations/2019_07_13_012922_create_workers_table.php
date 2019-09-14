@@ -19,7 +19,7 @@ class CreateWorkersTable extends Migration
             $table->foreign('organization_id')->references('id')->on('organizations');
             $table->string('worker_code')->unique(); //system generated ie AA12345
             $table->string('name');
-            $table->string('code'); //short or nick name
+            $table->string('code')->nullable(); //short or nick name
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
             $table->date('started_at')->nullable();

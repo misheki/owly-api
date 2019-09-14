@@ -14,4 +14,9 @@ class Report extends Model
     protected $fillable = [
         'organization_id', 'title', 'report_period', 'type', 'filename', 'file_path'
     ];
+
+    public function organization()
+    {
+        return $this->belongsTo('App\Organization');
+    }
 }

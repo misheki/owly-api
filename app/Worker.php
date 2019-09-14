@@ -15,8 +15,10 @@ class Worker extends Model
      * @var array
      */
     protected $fillable = [
-        'organization_id', 'worker_code', 'name', 'code', 'address', 'phone', 'started_at', 'ended_at', 'staff_id', 'qr', 'status', 'qr', 'status'
+        'organization_id', 'worker_code', 'name', 'code', 'address', 'phone', 'started_at', 'ended_at', 'staff_id', 'qr', 'status'
     ];
+
+    protected $dates = ['started_at', 'ended_at'];
 
     public function organization()
     {
