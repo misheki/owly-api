@@ -49,7 +49,7 @@ class RecordController extends Controller
                 $scan = Scan::create([
                     'user_id' => $user->id,
                     'worker_code' => $worker->worker_code,
-                    'scandt' => Carbon::now()
+                    'scan_dt' => Carbon::now()
                 ]);
 
                 return response()->json(['result' => 'GOOD', 'data' => $scan]);
