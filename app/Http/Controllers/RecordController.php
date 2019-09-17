@@ -36,7 +36,7 @@ class RecordController extends Controller
             //dissect QR code OWLY#<ORG CODE>#<WORKER CODE>
             $qr_code = explode('#', $request->qr_code, 3);
 
-            if($qr_code[0] != "OWLY#")
+            if($qr_code[0] != "OWLY")
                 return response()->json(['result' => 'INVALIDQR_PREFIX']);
 
             if($qr_code[1] != $user->organization->code)
