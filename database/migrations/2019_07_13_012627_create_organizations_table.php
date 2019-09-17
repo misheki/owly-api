@@ -22,7 +22,7 @@ class CreateOrganizationsTable extends Migration
             $table->string('contact_person');
             $table->string('email');
             $table->string('address');
-            $table->string('website'); 
+            $table->string('website')->nullable(); 
             $table->timestamps();
             $table->softDeletes();
         });
