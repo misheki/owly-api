@@ -78,8 +78,6 @@ class WorkerController extends Controller
     public function update(Request $request, $id) {
         try {
 
-            return $request->all();
-			
             $user = $this->user;
             
             $validator = Validator::make($request->all(), [
