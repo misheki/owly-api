@@ -12,7 +12,7 @@ class Scan extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'worker_code', 'scandt', 'edited_by', 'edit_remarks', 'edited_at'
+        'user_id', 'worker_code', 'scan_dt', 'edited_by', 'edit_remarks', 'edited_at'
     ];
 
     protected $dates = ['scandt', 'edited_at'];
