@@ -91,7 +91,7 @@ class RecordController extends Controller
             
             $validator = Validator::make($request->all(), [
                 'scan_dt' => 'required',
-                'remarks' => 'required'
+                'edit_remarks' => 'required'
             ]);
             
 	        if ($validator->fails()) {
