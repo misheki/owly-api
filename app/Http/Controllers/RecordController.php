@@ -90,7 +90,7 @@ class RecordController extends Controller
             $user = $this->user;
             
             $validator = Validator::make($request->all(), [
-                'scandt' => 'required',
+                'scan_dt' => 'required',
                 'remarks' => 'required'
             ]);
             
@@ -102,7 +102,7 @@ class RecordController extends Controller
 
             if(!is_null($scan)){
                 $scan->update([
-                    'scandt' => $request->scandt,
+                    'scan_dt' => $request->scan_dt,
                     'edit_remarks' => $request->edit_remarks,
                     'edited_by' => $user->id,
                     'edited_at' => Carbon::now()
