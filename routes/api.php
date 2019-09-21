@@ -24,15 +24,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => ['auth:api']], function () {
 
     Route::get('daily/{date}', 'RecordController@daily');
-
     Route::post('record/add', 'RecordController@add');
     Route::get('record/{id}/edit', 'RecordController@edit'); //Retrieve
     Route::put('record/{id}', 'RecordController@update');
     Route::delete('record/{id}', 'RecordController@delete');
 
+    Route::get('worker/list', 'WorkerController@list');
     Route::post('worker/add', 'WorkerController@add');
     Route::get('worker/{id}/edit', 'WorkerController@edit'); //Retrieve
     Route::put('worker/{id}', 'WorkerController@update');
     Route::delete('worker/{id}', 'WorkerController@delete');
+    
 
 });

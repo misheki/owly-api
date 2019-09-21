@@ -133,6 +133,22 @@ class WorkerController extends Controller
     	}
     }
 
+    public function list() {
+        try {
+			
+            $user = $this->user;
+            $workers = Worker::where('organization_id', $user->organization_id)->get();
+
+            if(!is_null($workers)){
+                return response()->json(['result' => 'GOOD', 'data' => $workers]);
+            }
+    	}
+    	catch (\Exception $e) {
+    		Log::error("Exc caught while WorkerController@list " . $e->getMessage());
+            return response()->json(['result' => 'ERROR', 'msg' => $e->getMessage()]);
+    	}
+    }
+
     protected function generateWorkerCode()
     {
         $int1 = rand(0,25);
