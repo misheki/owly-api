@@ -137,7 +137,7 @@ class WorkerController extends Controller
         try {
 			
             $user = $this->user;
-            $workers = Worker::where('organization_id', $user->organization_id)->sortBy('status')->get();
+            $workers = Worker::where('organization_id', $user->organization_id)->get()->sortBy('status');
 
             if(!is_null($workers)){
                 return response()->json(['result' => 'GOOD', 'data' => $workers]);
