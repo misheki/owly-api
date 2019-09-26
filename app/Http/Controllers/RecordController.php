@@ -148,7 +148,7 @@ class RecordController extends Controller
             // Get all scans of all users under the same organization
             $users = User::where('organization_id', $user->organization_id)->get();
             
-            $scans = Scan::whereDate('scan_dt', $date)->whereIn('user_id', $users)->get();
+            $scans = Scan::with('user')->whereDate('scan_dt', $date)->whereIn('user_id', $users)->get();
 
             if(!is_null($scans)){
                 return response()->json(['result' => 'GOOD', 'data' => $scans]);
