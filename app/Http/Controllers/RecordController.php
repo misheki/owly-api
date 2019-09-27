@@ -153,7 +153,7 @@ class RecordController extends Controller
             $data = array();
             if(!is_null($scans)){
                 foreach($scans as $scan){
-                    if(!in_array($scan->user_id, $data)){
+                    if(!in_array($scan->user_id, array_column($data, 'id'))){
                         array_push($data, array("id"=>$scan->user_id, "name"=>$scan->user->name, "in"=>$scan->scan_dt, "out"=>"No entry"));
                     }
                     else{
