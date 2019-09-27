@@ -47,16 +47,21 @@ class RecordController extends Controller
                             ->where('organization_id', $user->organization->id)->first();
 
             if(!is_null($worker)){
-                $scan = Scan::create([
-                    'user_id' => $user->id,
-                    'worker_code' => $worker->worker_code,
-                    'scan_dt' => Carbon::now()
-                ]);
-
-                return response()->json(['result' => 'GOOD', 'data' => $scan]);
+                if($worker->status == 'ACTIVE'){
+                    $scan = Scan::create([
+                        'user_id' => $user->id,
+                        'worker_code' => $worker->worker_code,
+                        'scan_dt' => Carbon::now()
+                    ]);
+    
+                    return response()->json(['result' => 'GOOD', 'data' => $scan]);
+                }
+                else {
+                    return response()->json(['result' => 'INVALIDQR_WORKERINACTIVE']);
+                }
             }
            
-            return response()->json(['result' => 'INVALIDQR_WORKER']);
+            return response()->json(['result' => 'INVALIDQR_NOSUCHWORKER']);
 			
     	}
     	catch (\Exception $e) {
