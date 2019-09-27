@@ -147,6 +147,8 @@ class RecordController extends Controller
 
     public function daily($date) {
         try {
+
+            $user = $this->user;
 			
             // Get all scans of all users under the same organization
             $users = User::where('organization_id', $user->organization_id)->get();
