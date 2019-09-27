@@ -166,14 +166,15 @@ class RecordController extends Controller
                     }
                     else{
                         foreach($data as &$d){
-                            if($d['id'] == $scan->worker_code && $d['out'] == "No entry"){
-                                $d['out'] = $scan->scan_dt;
-                                return;
-                            }        
-                            else{
-                                array_push($data, array("id"=>$scan->worker_code, "name"=>$worker->name, "in"=>$scan->scan_dt, "out"=>"No entry"));
-                                return;
-                            }    
+                            if($d['id'] == $scan->worker_code){
+                                if($d['out'] == "No entry"){
+                                    $d['out'] = $scan->scan_dt;
+                                }        
+                                else{
+                                    array_push($data, array("id"=>$scan->worker_code, "name"=>$worker->name, "in"=>$scan->scan_dt, "out"=>"No entry"));
+                                }
+                                break;
+                            }       
                         }
                     }    
                 }
