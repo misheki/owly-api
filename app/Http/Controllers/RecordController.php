@@ -148,8 +148,6 @@ class RecordController extends Controller
     public function daily($date) {
         try {
 			
-            $user = $this->user;
-
             // Get all scans of all users under the same organization
             $users = User::where('organization_id', $user->organization_id)->get();
             
@@ -168,9 +166,11 @@ class RecordController extends Controller
                         foreach($data as &$d){
                             if($d['id'] == $scan->worker_code && $d['out'] == "No entry"){
                                 $d['out'] = $scan->scan_dt;
+                                return;
                             }        
                             else{
                                 array_push($data, array("id"=>$scan->worker_code, "name"=>$worker->name, "in"=>$scan->scan_dt, "out"=>"No entry"));
+                                return;
                             }    
                         }
                     }    
