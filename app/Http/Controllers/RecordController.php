@@ -153,21 +153,24 @@ class RecordController extends Controller
             // Get all scans of all users under the same organization
             $users = User::where('organization_id', $user->organization_id)->get();
             
-            $scans = Scan::with('worker')->whereDate('scan_dt', $date)->whereIn('user_id', $users)->get();
+            $scans = Scan::whereDate('scan_dt', $date)->whereIn('user_id', $users)->get();
 
             $data = array();
             if(!is_null($scans)){
                 foreach($scans as $scan){
-                    if(!in_array($scan->user->id, array_column($data, 'id'))){
-                        array_push($data, array("id"=>$scan->user->id, "name"=>$scan->user->name, "in"=>$scan->scan_dt, "out"=>"No entry"));
+
+                    $worker = Worker::where('worker_code', $scan->worker_code)->firstOrFail();
+
+                    if(!in_array($scan->worker_code, array_column($data, 'id'))){
+                        array_push($data, array("id"=>$scan->worker_code, "name"=>$worker->name, "in"=>$scan->scan_dt, "out"=>"No entry"));
                     }
                     else{
                         foreach($data as &$d){
-                            if($d['id'] == $scan->user->id && $d['out'] == "No entry"){
+                            if($d['id'] == $scan->worker_code && $d['out'] == "No entry"){
                                 $d['out'] = $scan->scan_dt;
                             }        
                             else{
-                                array_push($data, array("id"=>$scan->user->id, "name"=>$scan->user->name, "in"=>$scan->scan_dt, "out"=>"No entry"));
+                                array_push($data, array("id"=>$scan->worker_code, "name"=>$worker->name, "in"=>$scan->scan_dt, "out"=>"No entry"));
                             }    
                         }
                     }    
