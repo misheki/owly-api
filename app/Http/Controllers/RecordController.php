@@ -158,18 +158,16 @@ class RecordController extends Controller
             $data = array();
             if(!is_null($scans)){
                 foreach($scans as $scan){
-                    if(!in_array($scan->user_id, array_column($data, 'id'))){
-                        array_push($data, array("id"=>$scan->user_id, "name"=>$scan->user->name, "in"=>$scan->scan_dt, "out"=>"No entry"));
+                    if(!in_array($scan->user->id, array_column($data, 'id'))){
+                        array_push($data, array("id"=>$scan->user->id, "name"=>$scan->user->name, "in"=>$scan->scan_dt, "out"=>"No entry"));
                     }
                     else{
                         foreach($data as &$d){
-                            if($d['id'] == $scan->user_id && $d['out'] == "No entry"){
-                                Log::error($d);
+                            if($d['id'] == $scan->user->id && $d['out'] == "No entry"){
                                 $d['out'] = $scan->scan_dt;
                             }        
                             else{
-                                Log::error("Creating new record");
-                                array_push($data, array("id"=>$scan->user_id, "name"=>$scan->user->name, "in"=>$scan->scan_dt, "out"=>"No entry"));
+                                array_push($data, array("id"=>$scan->user->id, "name"=>$scan->user->name, "in"=>$scan->scan_dt, "out"=>"No entry"));
                             }    
                         }
                     }    
