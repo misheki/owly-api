@@ -159,9 +159,11 @@ class RecordController extends Controller
                     else{
                         foreach($data as $d){
                             if($d['id'] == $scan->user_id && $d['out'] == "No entry"){
+                                Log::error($d);
                                 $d['out'] = $scan->scan_dt;
                             }        
                             else{
+                                Log::error("Creating new record");
                                 array_push($data, array("id"=>$scan->user_id, "name"=>$scan->user->name, "in"=>$scan->scan_dt, "out"=>"No entry"));
                             }    
                         }
