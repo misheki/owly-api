@@ -80,7 +80,7 @@ class RecordController extends Controller
 			return response()->json(['result' => 'NO_ACCESS']);
     	}
     	catch (\Exception $e) {
-    		Log::error("Exc caught while RecordController@edit " . $e->getMessage());
+    		Log::error("Exc caught while RecordController@edit: " . $e->getMessage());
             return response()->json(['result' => 'ERROR', 'msg' => $e->getMessage()]);
     	}
     }
@@ -115,7 +115,7 @@ class RecordController extends Controller
 			return response()->json(['result' => 'NOTFOUND']);
     	}
     	catch (\Exception $e) {
-    		Log::error("Exc caught while RecordController@update " . $e->getMessage());
+    		Log::error("Exc caught while RecordController@update: " . $e->getMessage());
             return response()->json(['result' => 'ERROR', 'msg' => $e->getMessage()]);
     	}
     }
@@ -150,12 +150,28 @@ class RecordController extends Controller
             
             $scans = Scan::with('user')->whereDate('scan_dt', $date)->whereIn('user_id', $users)->get();
 
+            $data = array();
             if(!is_null($scans)){
-                return response()->json(['result' => 'GOOD', 'data' => $scans]);
+                foreach($scans as $scan){
+                    if(!in_array($scan->user_id, $data)){
+                        array_push($data, array("id"=>$scan->user_id, "name"=>$scan->user->name, "in"=>$scan->scan_dt, "out"=>"No entry"));
+                    }
+                    else{
+                        foreach($data as $d){
+                            if($d['id'] == $scan->user_id && $d['out'] == "No entry"){
+                                $d['out'] = $scan->scan_dt;
+                            }        
+                            else{
+                                array_push($data, array("id"=>$scan->user_id, "name"=>$scan->user->name, "in"=>$scan->scan_dt, "out"=>"No entry"));
+                            }    
+                        }
+                    }    
+                }
+                return response()->json(['result' => 'GOOD', 'data' => $data]);
             }
     	}
     	catch (\Exception $e) {
-    		Log::error("Exc caught while RecordController@edit " . $e->getMessage());
+    		Log::error("Exc caught while RecordController@daily: " . $e->getMessage());
             return response()->json(['result' => 'ERROR', 'msg' => $e->getMessage()]);
     	}
     }
