@@ -162,7 +162,7 @@ class RecordController extends Controller
                     $worker = Worker::where('worker_code', $scan->worker_code)->firstOrFail();
 
                     if(!in_array($scan->worker_code, array_column($data, 'id'))){
-                        array_push($data, array("id"=>$scan->worker_code, "name"=>$worker->name, "in"=>$scan->scan_dt, "out"=>"No entry"));
+                        array_push($data, array("id"=>$scan->worker_code, "name"=>$worker->name, "in"=>Carbon::parse($scan->scan_dt)->format('g:i A'), "out"=>"No entry"));
                     }
                     else{
                         foreach($data as &$d){
@@ -171,7 +171,7 @@ class RecordController extends Controller
                                     $d['out'] = $scan->scan_dt;
                                 }        
                                 else{
-                                    array_push($data, array("id"=>$scan->worker_code, "name"=>$worker->name, "in"=>$scan->scan_dt, "out"=>"No entry"));
+                                    array_push($data, array("id"=>$scan->worker_code, "name"=>$worker->name, "in"=>Carbon::parse($scan->scan_dt)->format('g:i A'), "out"=>"No entry"));
                                 }
                                 break;
                             }       
