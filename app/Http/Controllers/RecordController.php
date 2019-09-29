@@ -32,8 +32,7 @@ class RecordController extends Controller
 	        if ($validator->fails()) {
 	            return response()->json(['result' => 'ERROR', 'msg' => $validator->errors()->first()]);
             }
-            
-            
+                 
             //dissect QR code OWLY#<ORG CODE>#<WORKER CODE>
             $qr_code = explode('#', $request->qr_code, 3);
 
@@ -53,7 +52,9 @@ class RecordController extends Controller
                         'worker_code' => $worker->worker_code,
                         'scan_dt' => Carbon::now()
                     ]);
-    
+
+                    $scan->setAttribute('name', $worker->name);
+
                     return response()->json(['result' => 'GOOD', 'data' => $scan]);
                 }
                 else {
