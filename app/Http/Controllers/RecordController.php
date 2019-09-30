@@ -19,7 +19,7 @@ class RecordController extends Controller
         $this->user = Auth::guard('api')->user();
     }
 
-    public function confirmAdd(Request $request) {
+    public function addConfirm(Request $request) {
         try {
 			
             $user = $this->user;
