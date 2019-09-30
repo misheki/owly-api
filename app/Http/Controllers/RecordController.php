@@ -46,7 +46,7 @@ class RecordController extends Controller
 
             if(!is_null($worker)){
                 if($worker->status == 'ACTIVE'){
-                    $scan_dt = Carbon::now();
+                    $scan_dt = Carbon::now()->format('Y-m-d H:i:s');
                     return response()->json(['result' => 'GOOD', 'name' => $worker->name, 'scan_dt' => $scan_dt]);
                 }
                 else {
