@@ -46,7 +46,8 @@ class RecordController extends Controller
 
             if(!is_null($worker)){
                 if($worker->status == 'ACTIVE'){
-                    return response()->json(['result' => 'GOOD']);
+                    $scan_dt = Carbon::now();
+                    return response()->json(['result' => 'GOOD', 'name' => $worker->name, 'scan_dt' => $scan_dt]);
                 }
                 else {
                     return response()->json(['result' => 'INVALIDQR_WORKERINACTIVE']);
@@ -69,7 +70,8 @@ class RecordController extends Controller
             $user = $this->user;
 
             $validator = Validator::make($request->all(), [
-	            'qr_code' => 'required|min:14'
+                'qr_code' => 'required|min:14',
+                'scan_dt' => 'required'
             ]);
             
 	        if ($validator->fails()) {
@@ -93,7 +95,7 @@ class RecordController extends Controller
                     $scan = Scan::create([
                         'user_id' => $user->id,
                         'worker_code' => $worker->worker_code,
-                        'scan_dt' => Carbon::now()
+                        'scan_dt' => $request->scan_dt
                     ]);
 
                     $scan->setAttribute('name', $worker->name);
