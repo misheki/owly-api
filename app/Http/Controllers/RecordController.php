@@ -98,9 +98,7 @@ class RecordController extends Controller
                         'scan_dt' => $request->scan_dt
                     ]);
 
-                    $scan->setAttribute('name', $worker->name);
-
-                    return response()->json(['result' => 'GOOD', 'data' => $scan]);
+                    return response()->json(['result' => 'GOOD']);
                 }
                 else {
                     return response()->json(['result' => 'INVALIDQR_WORKERINACTIVE']);
