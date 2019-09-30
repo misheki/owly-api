@@ -18,6 +18,49 @@ class RecordController extends Controller
     {
         $this->user = Auth::guard('api')->user();
     }
+
+    public function confirmAdd(Request $request) {
+        try {
+			
+            $user = $this->user;
+
+            $validator = Validator::make($request->all(), [
+	            'qr_code' => 'required|min:14'
+            ]);
+            
+	        if ($validator->fails()) {
+	            return response()->json(['result' => 'ERROR', 'msg' => $validator->errors()->first()]);
+            }
+                 
+            //dissect QR code OWLY#<ORG CODE>#<WORKER CODE>
+            $qr_code = explode('#', $request->qr_code, 3);
+
+            if($qr_code[0] != "OWLY")
+                return response()->json(['result' => 'INVALIDQR_PREFIX']);
+
+            if($qr_code[1] != $user->organization->code)
+                return response()->json(['result' => 'INVALIDQR_ORGCODE']);
+
+            $worker = Worker::where('worker_code', $qr_code[2])
+                            ->where('organization_id', $user->organization->id)->first();
+
+            if(!is_null($worker)){
+                if($worker->status == 'ACTIVE'){
+                    return response()->json(['result' => 'GOOD']);
+                }
+                else {
+                    return response()->json(['result' => 'INVALIDQR_WORKERINACTIVE']);
+                }
+            }
+           
+            return response()->json(['result' => 'INVALIDQR_NOSUCHWORKER']);
+			
+    	}
+    	catch (\Exception $e) {
+    		Log::error("Exc caught while RecordController@addConfirm: " . $e->getMessage());
+            return response()->json(['result' => 'ERROR', 'msg' => $e->getMessage()]);
+    	}
+    }
     
     public function add(Request $request) {
 
