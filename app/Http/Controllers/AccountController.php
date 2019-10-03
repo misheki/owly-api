@@ -7,7 +7,6 @@ use App\Organization;
 use App\User;
 use Log;
 use Carbon\Carbon;
-use Validator;
 use Auth;
 
 class AccountController extends Controller
@@ -23,8 +22,10 @@ class AccountController extends Controller
 			
             $user = $this->user;
 
+            $today = Carbon::now()->toFormattedDateString();
+
             if($user->status == 'ACTIVE'){
-                return response()->json(['result' => 'GOOD', 'user' => $user, 'merchant' => $user->organization]);
+                return response()->json(['result' => 'GOOD', 'user' => $user, 'merchant' => $user->organization, 'today' => $today]);
             }
 
 			return response()->json(['result' => 'NO_ACCESS']);
