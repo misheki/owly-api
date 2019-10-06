@@ -220,16 +220,17 @@ class RecordController extends Controller
                     $worker = Worker::where('worker_code', $scan->worker_code)->firstOrFail();
 
                     if(!in_array($scan->worker_code, array_column($data, 'id'))){
-                        array_push($data, array("id"=>$scan->worker_code, "name"=>$worker->name, "in"=>Carbon::parse($scan->scan_dt)->format('g:i:s A'), "out"=>"No entry"));
+                        array_push($data, array("id"=>$scan->worker_code, "name"=>$worker->name, "in_id" =>$scan->id, "in"=>Carbon::parse($scan->scan_dt)->format('g:i:s A'), "out_id"=>null, "out"=>"No entry"));
                     }
                     else{
                         foreach($data as &$d){
                             if($d['id'] == $scan->worker_code){
                                 if($d['out'] == "No entry"){
+                                    $d['out_id'] = $scan->id;
                                     $d['out'] = Carbon::parse($scan->scan_dt)->format('g:i:s A');
                                 }        
                                 else{
-                                    array_push($data, array("id"=>$scan->worker_code, "name"=>$worker->name, "in"=>Carbon::parse($scan->scan_dt)->format('g:i:s A'), "out"=>"No entry"));
+                                    array_push($data, array("id"=>$scan->worker_code, "name"=>$worker->name, "in_id" =>$scan->id, "in"=>Carbon::parse($scan->scan_dt)->format('g:i:s A'), "out_id"=>null, "out"=>"No entry"));
                                 }
                                 break;
                             }       
