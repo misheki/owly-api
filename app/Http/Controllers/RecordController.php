@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Worker;
 use App\Scan;
 use App\User;
+use App\Report;
 use Log;
 use Carbon\Carbon;
 use Validator;
@@ -193,6 +194,14 @@ class RecordController extends Controller
         try {
 
             $user = $this->user;
+            $editable = false;
+
+            //Check if $date records are still editable or not.
+            $latest_report = Report::where('organization_id', $user->organization_id)->latest()->first();
+            $cutoff_date = Carbon::parse($latest_report->created_at);
+            $requested_date = Carbon::parse($date);
+            if($requested_date->greaterThan($cutoff_date))
+                $editable = true;
 			
             // Get all scans of all users under the same organization
             $users = User::where('organization_id', $user->organization_id)->get();
@@ -222,7 +231,7 @@ class RecordController extends Controller
                         }
                     }    
                 }
-                return response()->json(['result' => 'GOOD', 'data' => $data]);
+                return response()->json(['result' => 'GOOD', 'data' => $data, 'editable' => $editable]);
             }
     	}
     	catch (\Exception $e) {
