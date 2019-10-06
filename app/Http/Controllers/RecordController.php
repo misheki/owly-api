@@ -198,10 +198,13 @@ class RecordController extends Controller
 
             //Check if $date records are still editable or not.
             $latest_report = Report::where('organization_id', $user->organization_id)->latest()->first();
-            $cutoff_date = Carbon::parse($latest_report->created_at);
-            $requested_date = Carbon::parse($date);
-            if($requested_date->greaterThan($cutoff_date))
-                $editable = true;
+            if(!is_null($latest_report)){
+                $cutoff_date = Carbon::parse($latest_report->created_at);
+                $requested_date = Carbon::parse($date);
+                if($requested_date->greaterThan($cutoff_date))
+                    $editable = true;
+            }
+            
 			
             // Get all scans of all users under the same organization
             $users = User::where('organization_id', $user->organization_id)->get();
