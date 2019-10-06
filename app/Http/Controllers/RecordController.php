@@ -204,6 +204,8 @@ class RecordController extends Controller
                 if($requested_date->greaterThan($cutoff_date))
                     $editable = true;
             }
+            else
+                $editable = true;
             
 			
             // Get all scans of all users under the same organization
