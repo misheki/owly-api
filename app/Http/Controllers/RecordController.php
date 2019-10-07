@@ -149,7 +149,19 @@ class RecordController extends Controller
 	            return response()->json(['result' => 'ERROR', 'msg' => $validator->errors()->first()]);
             }
 
+            //Check if $date records are still editable or not.
+            $latest_report = Report::where('organization_id', $user->organization_id)->latest()->first();
+            if(!is_null($latest_report)){
+                $cutoff_date = Carbon::parse($latest_report->created_at);
+                $new_scandt = Carbon::parse($request->scan_dt);
+                if($new_scandt->lessThan($cutoff_date))
+                    return response()->json(['result' => 'INVALID_NEWDT']);
+            }
+           
             $scan = Scan::where('id', $id)->where('user_id', $user->id)->first();
+
+            if($scan->scan_dt->lessThan($cutoff_date))
+                    return response()->json(['result' => 'LOCKED_SCANDT']);
 
             if(!is_null($scan)){
                 $scan->update([
@@ -176,6 +188,14 @@ class RecordController extends Controller
             $user = $this->user;
 
             $scan = Scan::where('id', $id)->where('user_id', $user->id)->first();
+            //Check if $date records are still editable or not.
+            $latest_report = Report::where('organization_id', $user->organization_id)->latest()->first();
+            if(!is_null($latest_report)){
+                $cutoff_date = Carbon::parse($latest_report->created_at);
+                $scandt = Carbon::parse($scan->scan_dt);
+                if($scandt->lessThan($cutoff_date))
+                    return response()->json(['result' => 'LOCKED_SCANDT']);
+            }
             
             if(!is_null($scan)){
                 $scan->delete();
@@ -201,8 +221,9 @@ class RecordController extends Controller
             if(!is_null($latest_report)){
                 $cutoff_date = Carbon::parse($latest_report->created_at);
                 $requested_date = Carbon::parse($date);
-                if($requested_date->greaterThan($cutoff_date))
-                    $editable = true;
+                // if($requested_date->diffInDays($cutoff_date))
+                //     $editable = true;
+                $editable = $requested_date->diffInDays($cutoff_date);
             }
             else
                 $editable = true;
