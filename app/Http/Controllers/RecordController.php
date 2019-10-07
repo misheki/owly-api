@@ -160,7 +160,7 @@ class RecordController extends Controller
            
             $scan = Scan::where('id', $id)->where('user_id', $user->id)->first();
 
-            if($scan->scan_dt->startOfDay()->lessThan($cutoff_date))
+            if(Carbon::parse($scan->scan_dt)->startOfDay()->lessThan($cutoff_date))
                     return response()->json(['result' => 'LOCKED_SCANDT']);
 
             if(!is_null($scan)){
