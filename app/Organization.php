@@ -15,7 +15,7 @@ class Organization extends Model
      * @var array
      */
     protected $fillable = [
-        'org_category_id', 'name', 'code', 'contact_person', 'email', 'address', 'website'
+        'org_category_id', 'name', 'code', 'status', 'contact_person', 'email', 'address', 'website'
     ];
 
     public function org_category()

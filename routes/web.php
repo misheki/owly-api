@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//reports - disable after testing
+Route::get('/pdf/daily','ReportController@daily');
+Route::get('/pdf/periodic','ReportController@periodic');

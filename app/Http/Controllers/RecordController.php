@@ -188,7 +188,7 @@ class RecordController extends Controller
             $user = $this->user;
 
             $scan = Scan::where('id', $id)->where('user_id', $user->id)->first();
-            //Check if $date records are still editable or not.
+            //Check if $date records can be deleted or not.
             $latest_report = Report::where('organization_id', $user->organization_id)->latest()->first();
             if(!is_null($latest_report)){
                 $cutoff_date = Carbon::parse($latest_report->created_at)->startOfDay();
