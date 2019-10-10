@@ -14,7 +14,7 @@ class AddColumnStatusToOrganizations extends Migration
     public function up()
     {
         Schema::table('organizations', function (Blueprint $table) {
-            $table->string('status')->default('INACTIVE')->after('code'); //ACTIVE, INACTIVE
+            $table->string('status')->after('code'); //ACTIVE, INACTIVE
         });
     }
 
