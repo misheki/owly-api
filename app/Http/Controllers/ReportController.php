@@ -35,46 +35,37 @@ class ReportController extends Controller
                 $scans = Scan::whereDate('scan_dt', $yesterday)->whereIn('user_id', $users)->get();
 
                 $data = array();
+                $count = 0;
                 if(!is_null($scans)){
                     foreach($scans as $scan){
 
                         $worker = Worker::where('worker_code', $scan->worker_code)->firstOrFail();
 
-                        if(!in_array($scan->worker_code, array_column($data, 'id'))){
-                            array_push($data, array("id"=>$scan->worker_code, "name"=>$worker->name, "in_id" =>$scan->id, "in"=>Carbon::parse($scan->scan_dt)->format('g:i:s A'), "scan_in"=>$scan->scan_dt, "out_id"=>null, "out"=>"No entry", "scan_out"=>null, "regular"=>0, "overtime"=>0));
+                        if(!in_array($scan->worker_code, array_column($data, 'worker_code'))){
+                            array_push($data, array("id"=>$count, "worker_code"=>$scan->worker_code, "name"=>$worker->name, "in_id" =>$scan->id, "in"=>Carbon::parse($scan->scan_dt)->format('g:i:s A'), "scan_in"=>$scan->scan_dt, "out_id"=>null, "out"=>"No entry", "scan_out"=>null));
+                            $count++;
                         }
                         else{
                             foreach($data as &$d){
-                                if($d['id'] == $scan->worker_code){
+                                if($d['worker_code'] == $scan->worker_code){
                                     if($d['out'] == "No entry"){
                                         $d['out_id'] = $scan->id;
                                         $d['out'] = Carbon::parse($scan->scan_dt)->format('g:i:s A');
                                         $d['scan_out'] = $scan->scan_dt;
-                                        
-                                        $to = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $d['scan_in']);
-                                        $from = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $d['scan_out']);
-                                        $diff_in_hours = $to->diffInHours($from);
-                                        if($diff_in_hours > 8){
-                                            $regular = 8;
-                                            $overtime = $diff_in_hours - 8;
-                                        }
-                                        else{
-                                            $regular = $diff_in_hours;
-                                            $overtime = 0;
-                                        }
-                                            
-                                        $d['regular'] = $regular;
-                                        $d['overtime'] = $overtime;
                                     }        
                                     else{
-                                        array_push($data, array("id"=>$scan->worker_code, "name"=>$worker->name, "in_id" =>$scan->id, "in"=>Carbon::parse($scan->scan_dt)->format('g:i:s A'), "scan_in"=>$scan->scan_dt, "out_id"=>null, "out"=>"No entry", "scan_out"=>null, "regular"=>0, "overtime"=>0));
+                                        array_push($data, array("id"=>$count, "worker_code"=>$scan->worker_code, "name"=>$worker->name, "in_id" =>$scan->id, "in"=>Carbon::parse($scan->scan_dt)->format('g:i:s A'), "scan_in"=>$scan->scan_dt, "out_id"=>null, "out"=>"No entry", "scan_out"=>null));
+                                        $count++;
                                     }
                                     break;
                                 }       
                             }
                         }    
                     }
-                    return response()->json(['result' => 'GOOD', 'data' => $data]);
+
+                    $totals = $this->calculateHours($data);
+                    
+                    return response()->json(['result' => 'GOOD', 'records' => $data, 'totals' => $totals]);
                 }
                 return response()->json(['result' => 'NORECORDS']);
             }
@@ -87,6 +78,52 @@ class ReportController extends Controller
 
     public function periodic() {
 
+    }
+
+    protected function calculateHours($records) {
+
+        $data = array();
+        $count = 0;
+
+        foreach($records as $record){
+            $to = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $record['scan_in']);
+            $from = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $record['scan_out']);
+            $diff_in_seconds = $to->diffInSeconds($from);
+
+            $hours = floor($diff_in_seconds / 3600);
+            $diff_in_seconds -= $hours * 3600;
+            $minutes = floor($diff_in_seconds / 60);
+            $hours = $hours + ($minutes/60);
+
+            if($hours > 8){
+                $regular = 8;
+                $overtime = $hours - 8;
+            }
+            else{
+                $regular = $hours;
+                $overtime = 0;
+            }
+
+            if(!in_array($record->worker_code, array_column($data, 'worker_code'))){
+                array_push($data, array("id"=>$count, "worker_code"=>$record->worker_code, "regular"=>$regular, "overtime"=>$overtime));
+                $count++;
+            }
+            else{
+                foreach($data as &$d){
+                    $r = $d['regular'] + $regular;
+                    if($r > 8){
+                        $d['regular'] = 8;
+                        $d['overtime'] = $d['overtime'] + ($r - 8) + $overtime;
+                    }
+                    else{
+                        $d['regular'] = $r;
+                        $d['overtime'] = $d['overtime'] + $overtime;
+                    }
+                }
+            }
+        }
+
+        return $data;
     }
 
 }
