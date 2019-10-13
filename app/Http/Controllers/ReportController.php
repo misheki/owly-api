@@ -23,7 +23,6 @@ class ReportController extends Controller
     public function daily($subdays) {
         try {
 
-            $user = $this->user;
             // $yesterday = Carbon\Carbon::yesterday();
             $yesterday = Carbon::now()->subDays($subdays);
             $organizations = Organization::where('status', 'ACTIVE')->get();
