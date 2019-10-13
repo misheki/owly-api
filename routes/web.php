@@ -16,5 +16,5 @@ Route::get('/', function () {
 });
 
 //reports - disable after testing
-Route::get('/pdf/daily','ReportController@daily');
+Route::get('/pdf/daily/{subdays}','ReportController@daily');
 Route::get('/pdf/periodic','ReportController@periodic');
