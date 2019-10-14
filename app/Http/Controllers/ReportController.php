@@ -38,12 +38,13 @@ class ReportController extends Controller
                 $count = 0;
                 if(!is_null($scans)){
                     foreach($scans as $scan){
-                        return $scan->worker_code;
+
                         $worker = Worker::where('worker_code', $scan->worker_code)->firstOrFail();
 
                         if(!in_array($scan->worker_code, array_column($data, 'worker_code'))){
                             array_push($data, array("id"=>$count, "worker_code"=>$scan->worker_code, "name"=>$worker->name, "in_id" =>$scan->id, "in"=>Carbon::parse($scan->scan_dt)->format('g:i:s A'), "scan_in"=>$scan->scan_dt, "out_id"=>null, "out"=>"No entry", "scan_out"=>null));
                             $count++;
+                            return 'inside if';
                         }
                         else{
                             foreach($data as &$d){
