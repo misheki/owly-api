@@ -34,8 +34,6 @@ class ReportController extends Controller
                 // Get all scans of these users yesterday
                 $scans = Scan::whereDate('scan_dt', $yesterday)->whereIn('user_id', $users)->get();
 
-                return $scans;
-
                 $data = array();
                 $count = 0;
                 if(!is_null($scans)){
@@ -72,7 +70,7 @@ class ReportController extends Controller
     	}
     	catch (\Exception $e) {
     		Log::error("Exc caught while RecordController@daily: " . $e->getMessage());
-            return response()->json(['result' => 'ERROR', 'msg' => $e->getMessage()]);
+            return response()->json(['result' => 'ERROR', 'msg' => $e]);
     	}
     }
 
