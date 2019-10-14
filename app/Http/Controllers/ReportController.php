@@ -34,11 +34,12 @@ class ReportController extends Controller
                 // Get all scans of these users yesterday
                 $scans = Scan::whereDate('scan_dt', $yesterday)->whereIn('user_id', $users)->get();
 
+                return $scans;
+
                 $data = array();
                 $count = 0;
                 if(!is_null($scans)){
                     foreach($scans as $scan){
-
                         $worker = Worker::where('worker_code', $scan->worker_code)->firstOrFail();
 
                         if(!in_array($scan->worker_code, array_column($data, 'worker_code'))){
@@ -52,7 +53,7 @@ class ReportController extends Controller
                                         $d['out_id'] = $scan->id;
                                         $d['out'] = Carbon::parse($scan->scan_dt)->format('g:i:s A');
                                         $d['scan_out'] = $scan->scan_dt;
-                                    }        
+                                    }
                                     else{
                                         array_push($data, array("id"=>$count, "worker_code"=>$scan->worker_code, "name"=>$worker->name, "in_id" =>$scan->id, "in"=>Carbon::parse($scan->scan_dt)->format('g:i:s A'), "scan_in"=>$scan->scan_dt, "out_id"=>null, "out"=>"No entry", "scan_out"=>null));
                                         $count++;
@@ -64,7 +65,6 @@ class ReportController extends Controller
                     }
 
                     $totals = $this->calculateHours($data);
-                    
                     return response()->json(['result' => 'GOOD', 'records' => $data, 'totals' => $totals]);
                 }
                 return response()->json(['result' => 'NORECORDS']);
