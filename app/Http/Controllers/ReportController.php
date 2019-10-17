@@ -82,19 +82,32 @@ class ReportController extends Controller
     protected function calculateHours($records) {
 
         try{
+            Log::error(">>>>CalculateHours");
             $data = array();
             $count = 0;
 
             foreach($records as $record){
                 if(!is_null($record['scan_out'])){
+                    Log::error($record);
                     $to = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $record['scan_in']);
                     $from = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $record['scan_out']);
                     $diff_in_seconds = $to->diffInSeconds($from);
 
+                    Log::error("to: " . $to);
+                    Log::error("from: " . $from);
+
                     $hours = floor($diff_in_seconds / 3600);
+                    Log::error("hours: " . $hours);
+                    Log::error("diff in seconds: " . $diff_in_seconds);
+                    
                     $diff_in_seconds -= $hours * 3600;
                     $minutes = floor($diff_in_seconds / 60);
                     $hours = $hours + ($minutes/60);
+
+                    Log::error("hours: " . $hours);
+                    Log::error("diff in seconds: " . $diff_in_seconds);
+                    Log::error("minutes: " . $minutes);
+                    Log::error();
 
                     if($hours > 8){
                         $regular = 8;
@@ -124,6 +137,7 @@ class ReportController extends Controller
                     }
                 }
             }
+            Log::error("<<<<CalculateHours");
             return $data;
         }
         catch (\Exception $e) {
