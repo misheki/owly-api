@@ -99,7 +99,7 @@ class ReportController extends Controller
                     $hours = floor($diff_in_seconds / 3600);
                     Log::error("hours: " . $hours);
                     Log::error("diff in seconds: " . $diff_in_seconds);
-                    
+
                     $diff_in_seconds -= $hours * 3600;
                     $minutes = floor($diff_in_seconds / 60);
                     $hours = $hours + ($minutes/60);
@@ -107,7 +107,6 @@ class ReportController extends Controller
                     Log::error("hours: " . $hours);
                     Log::error("diff in seconds: " . $diff_in_seconds);
                     Log::error("minutes: " . $minutes);
-                    Log::error();
 
                     if($hours > 8){
                         $regular = 8;
