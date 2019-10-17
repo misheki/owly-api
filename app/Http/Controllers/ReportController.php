@@ -104,8 +104,8 @@ class ReportController extends Controller
                     $overtime = 0;
                 }
 
-                if(!in_array($record->worker_code, array_column($data, 'worker_code'))){
-                    array_push($data, array("id"=>$count, "worker_code"=>$record->worker_code, "regular"=>$regular, "overtime"=>$overtime));
+                if(!in_array($record['worker_code'], array_column($data, 'worker_code'))){
+                    array_push($data, array("id"=>$count, "worker_code"=>$record['worker_code'], "regular"=>$regular, "overtime"=>$overtime));
                     $count++;
                 }
                 else{
