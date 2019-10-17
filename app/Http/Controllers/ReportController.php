@@ -102,7 +102,7 @@ class ReportController extends Controller
 
                     $diff_in_seconds -= $hours * 3600;
                     $minutes = floor($diff_in_seconds / 60);
-                    $hours = $hours + floor($minutes/60, 2);
+                    $hours = $hours + round($minutes/60, 2);
 
                     Log::error("hours: " . $hours);
                     Log::error("diff in seconds: " . $diff_in_seconds);
