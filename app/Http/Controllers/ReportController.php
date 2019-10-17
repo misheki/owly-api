@@ -89,8 +89,8 @@ class ReportController extends Controller
             foreach($records as $record){
                 if(!is_null($record['scan_out'])){
                     Log::error($record);
-                    $to = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $record['scan_in']);
-                    $from = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $record['scan_out']);
+                    $from = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record['scan_in']);
+                    $to = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record['scan_out']);
                     $diff_in_seconds = $to->diffInSeconds($from);
 
                     Log::error("to: " . $to);
