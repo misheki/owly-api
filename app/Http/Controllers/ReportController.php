@@ -86,7 +86,7 @@ class ReportController extends Controller
             $count = 0;
 
             foreach($records as $record){
-                return $record;
+                return $record['worker_code'];
                 $to = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $record['scan_in']);
                 $from = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $record['scan_out']);
                 $diff_in_seconds = $to->diffInSeconds($from);
